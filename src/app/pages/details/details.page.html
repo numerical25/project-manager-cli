@@ -1,0 +1,211 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Project Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [formGroup]="workReqForm" class="ion-margin-bottom">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button href="/">Back</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-start ion-padding-end">
+      <ion-col>
+        <strong>Work Request Details</strong>
+        <ion-list>
+          <ion-item>
+            <ion-select formControlName="request_type_id" interface="popover" placeholder="Work Request Type">
+              <ion-select-option *ngFor="let requestType of requestTypes; let i=index" [value]="requestType.id">
+                {{ requestType.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label fixed>Project Name</ion-label>
+          <ion-input formControlName="project_name" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Description</ion-label>
+          <ion-textarea formControlName="description" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Business Case</ion-label>
+          <ion-textarea formControlName="business_case" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Consequences of Not Going Forward</ion-label>
+          <ion-textarea formControlName="consequences" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Risk /Dependencies / Assumption</ion-label>
+          <ion-textarea formControlName="risk_dependency_assumption" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Objective(s)</ion-label>
+          <ion-textarea formControlName="objectives" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Long time Goal(s)</ion-label>
+          <ion-textarea formControlName="long_term_goals" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Metrics to Improve</ion-label>
+          <ion-textarea formControlName="metrics_to_compare" type="text" value=""></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Project Charter Link</ion-label>
+          <ion-input formControlName="project_charter_link" type="text" value=""></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-select formControlName="work_type_id" interface="popover" placeholder="Work Type">
+                  <ion-select-option *ngFor="let workType of workTypes; let i=index" [value]="workType.id">{{ workType.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-select formControlName="risk_level_id" interface="popover" placeholder="Select Consequences Risk Level">
+                  <ion-select-option *ngFor="let risk of riskLevels; let i=index" [value]="risk.id">
+                    {{ risk.name }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Benefit Type</ion-col>
+        </ion-row>
+        <ion-row formArrayName="benefit_types">
+          <ion-col *ngFor="let benefitType of benefitTypes; let i = index;" size="6">
+            <ion-item [formGroupName]="i">
+              <ion-checkbox formControlName="is_checked" [value]="benefitType.id" slot="start"></ion-checkbox> {{benefitType.name}}
+              <input type="hidden" formControlName="id">
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-item>
+                    <ion-select formControlName="urgency_id" interface="popover" placeholder="Urgency">
+                      <ion-select-option *ngFor="let urgency of urgencies; let i=index" [value]="urgency.id">{{ urgency.name }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+              <ion-col>
+                <ion-list>
+                  <ion-item>
+                    <ion-select formControlName="risk_level_id"  interface="popover" placeholder="Level of Impact: Significant">
+                      <ion-select-option *ngFor="let risk of riskLevels; let i=index" [value]="risk.id">{{ risk.name }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Person Making This Request
+              <ion-input formControlName="requested_by"  type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Functional Department Name
+              <ion-input formControlName="department_name" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Functional Contact Name
+              <ion-input formControlName="contact_name" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Functional Contact Email
+              <ion-input formControlName="contact_email" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Functional Contact Number
+              <ion-input formControlName="contact_number" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-select formControlName="requires_technical_assistance"
+                            interface="popover" placeholder="Requires IT Assissitance">
+                  <ion-select-option *ngFor="let options of technicalAssistanceOptions; let i=index" [value]="options.id" >
+                    {{ options.name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Technical Department Name
+              <ion-input formControlName="technical_group_name" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Technical Contact Name
+              <ion-input formControlName="technical_contact_name" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Technical Contact Email
+              <ion-input formControlName="technical_contact_email" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              Technical Contact Number
+              <ion-input formControlName="technical_contact_number" type="text" value=""></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-end ion-padding-start">
+      <ion-col>
+        <ion-button (click)="submit()" expand="block">Save Work Request</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

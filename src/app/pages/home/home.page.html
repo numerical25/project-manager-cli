@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Project Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-button href="/details">Create Work Request</ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2" [formGroup]="workRequestFilterForm">
+        <ion-row>
+          <ion-col class="border-danger border-dark border border-2 border">
+            <strong>Departments</strong>
+            <ion-row>
+              <ion-col>
+                Status
+                <div *ngFor="let status of statuses; let i=index" class="ion-padding-start">
+                  <ion-checkbox (ionChange)="filterWorkRequest()" slot="start"></ion-checkbox>
+                  {{status.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row formArrayName="request_types">
+              <ion-col>
+                Type
+                <div *ngFor="let type of requestTypes; let i=index" [formGroupName]="i" class="ion-padding-start">
+                    <ion-checkbox (ionChange)="filterWorkRequest()" formControlName="is_checked" slot="start"></ion-checkbox>
+                    <input type="hidden" formControlName="id">
+                  {{type.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row formArrayName="risk_levels">
+              <ion-col>
+                Consequences Risk Level
+                <div *ngFor="let risk of riskLevels; let i=index" [formGroupName]="i" class="ion-padding-start">
+                  <ion-checkbox (ionChange)="filterWorkRequest()" formControlName="is_checked" slot="start"></ion-checkbox>
+                  <input type="hidden" formControlName="id">
+                  {{risk.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row formArrayName="priorities">
+              <ion-col>
+                Priorities
+                <div *ngFor="let priority of priorities; let i=index" [formGroupName]="i" class="ion-padding-start">
+                  <ion-checkbox (ionChange)="filterWorkRequest()" formControlName="is_checked" slot="start"></ion-checkbox>
+                  <input type="hidden" formControlName="id">
+                  {{priority.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row formArrayName="urgencies">
+              <ion-col>
+                Urgency
+                <div *ngFor="let urgent of urgencies; let i=index" [formGroupName]="i" class="ion-padding-start">
+                  <ion-checkbox (ionChange)="filterWorkRequest()" formControlName="is_checked" slot="start"></ion-checkbox>
+                  <input type="hidden" formControlName="id">
+                  {{urgent.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row formArrayName="level_of_impacts">
+              <ion-col>
+                Level of Impact
+                <div *ngFor="let lofImpact of levelOfImpact; let i=index" [formGroupName]="i" class="ion-padding-start">
+                  <ion-checkbox (ionChange)="filterWorkRequest()" formControlName="is_checked" slot="start"></ion-checkbox>
+                  <input type="hidden" formControlName="id">
+                  {{lofImpact.name}}
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="10">
+        <strong>Work Requests</strong>
+        <ion-row *ngFor="let workreq of workrequests; let i=index"  class="border border-dark border-3 ion-margin-bottom">
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                {{workreq.project_name}}<br/>
+                {{workreq.description}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-justify-content-start">
+                <ion-button [href]="'/details/'+workreq.id">View Details</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
